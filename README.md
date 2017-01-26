@@ -1,1 +1,1 @@
-Heroku osoite https://kaljaarvosteluror.herokuapp.com/breweries
+Heroku osoite https://kaljaarvosteluror.herokuapp.com/
