@@ -31,7 +31,7 @@ class BreweriesController < ApplicationController
       if @brewery.save
         format.html { redirect_to @brewery, notice: 'Brewery was successfully created.' }
         format.json { render :show, status: :created, location: @brewery }
-      else
+      else    
         format.html { render :new }
         format.json { render json: @brewery.errors, status: :unprocessable_entity }
       end
@@ -68,15 +68,15 @@ class BreweriesController < ApplicationController
       @brewery = Brewery.find(params[:id])
     end
 
-    def authenticate
-      admin_accounts = { "admin" => "secret", "pekka" => "beer", "arto" => "foobar", "matti" => "ittam"}
-      authenticate_or_request_with_http_basic do |username|
-        admin_accounts[username]
-      end
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def brewery_params
       params.require(:brewery).permit(:name, :year)
     end
+
+    def authenticate
+      admin_accounts = { "admin" => "secret", "pekka" => "beer", "arto" => "foobar", "matti" => "ittam"}
+      authenticate_or_request_with_http_basic do |username, password|
+        admin_accounts[username] == password
+      end      
+    end    
 end
