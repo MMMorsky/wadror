@@ -1,0 +1,51 @@
+require 'rails_helper'
+
+RSpec.describe User, type: :model do
+  it "has the username set correctly" do
+    user = User.new username: "Pekka"
+
+    # user.username.should == "Pekka"
+    expect(user.username).to eq("Pekka")
+  end
+
+  it "is not saved without a password" do
+    user = User.create username: "Pekka"
+
+    expect(user).not_to be_valid
+    expect(User.count).to eq(0)
+  end
+
+  it "wont allow to save short password" do
+    user = User.create username:"Pekka", password:"Pa1", password_confirmation:"Pa1"
+    expect(user).not_to be_valid
+    expect(User.count).to eq(0)
+  end
+
+
+
+  it "wont allow to save password without number" do
+    user = User.create username:"Pekka", password:"ababab", password_confirmation:"ababab"
+    expect(user).not_to be_valid
+    expect(User.count).to eq(0)
+  end
+
+
+
+  describe "with a proper password" do
+    let(:user){ FactoryGirl.create(:user) }
+
+    it "is saved" do
+      expect(user.valid?).to be(true)
+      expect(User.count).to eq(1)
+    end
+
+    it "and a proper two ratings, has the correct average rating" do
+      user.ratings << FactoryGirl.create(:rating)
+      user.ratings << FactoryGirl.create(:rating2)
+
+      expect(user.ratings.count).to eq(2)
+      expect(user.average_rating).to eq(15.0)
+    end
+
+  end
+end
