@@ -43,7 +43,12 @@ group :development, :test do
   gem 'byebug'
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.5'
+end
+
+group :test do
   gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 group :development do

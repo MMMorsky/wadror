@@ -6,6 +6,10 @@
   <% end %>
 </ul>
 
+<ul>
+  <p>Number of ratings: <%= @ratings.count %></p>
+</ul>
+
 <% if current_user %>
 <%= link_to "new rating", new_rating_path %>
 <% end %>
