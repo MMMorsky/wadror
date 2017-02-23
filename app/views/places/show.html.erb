@@ -1,6 +1,7 @@
-<h3> <%= @place.name %></h3>
-<h3> <%= @place.status %></h3>
-<h3> <%= @place.street %></h3>
-<h3> <%= @place.zip %></h3>
-<h3> <%= @place.city %></h3>
-<h3> Average rating: <%= @place.overall %></h3>
+<h2> <%= @place.name %> </h2>
+
+<p> <%= @place.street %></p>
+
+<p> <%= @place.zip %> <%= @place.city %> </p>
+
+<iframe src="<%= @place.url %>" width="600" height="400"></iframe>

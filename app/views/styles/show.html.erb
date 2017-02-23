@@ -1,14 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
+<h2>
   <%= @style.name %>
-</p>
+</h2>
 
-<p>
-  <strong>Description:</strong>
+<quote>
   <%= @style.description %>
-</p>
+</quote>
 
-<%= link_to 'Edit', edit_style_path(@style) %> |
-<%= link_to 'Back', styles_path %>
+<% if %>
+  <%= link_to 'Edit', edit_style_path(@style) %> 
+  <%= link_to 'Delete', @style, method: :delete, data: { confirm: 'Are you sure?' }%> 
+<% end %>
+
+<h4>Beers</h4>
+
+<ul>
+  <% @style.beers.each do |beer| %>
+    <li>
+      <%= link_to beer, beer %>
+    </li>
+  <% end %>
+</ul>
