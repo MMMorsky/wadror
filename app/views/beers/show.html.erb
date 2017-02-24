@@ -12,7 +12,7 @@
  <p>beer has not yet been rated!</p>
 <% else %>
   <p>
-    Has <%= pluralize(@beer.ratings.count, 'rating') %>, average <%= @beer.average_rating %>
+    Has <%= pluralize(@beer.ratings.count, 'rating') %>, average <%= number_with_precision(@beer.average_rating, precision: 1) %>
   </p>
 <% end %>
 
@@ -24,8 +24,8 @@
     score: <%= f.number_field :score %>
     <%= f.submit %>
   <% end %>
-  
-  <%= link_to 'Edit', edit_beer_path(@beer) %>
-  <%= link_to 'Destroy', @beer, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+    <%= edit_and_destroy_buttons(@beer) %>
+
 <% end %>
 

@@ -51,6 +51,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def freezeAccount
+    user = User.find(params[:id])
+    user.update_attribute(:blocked, true)
+
+
+    redirect_to :back, notice:"Account frozen"
+  end
+
+  def unFreezeAccount
+    user = User.find(params[:id])
+    user.update_attribute(:blocked, nil)
+
+    redirect_to :back, notice:"Account unfrozen"
+  end
+
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy

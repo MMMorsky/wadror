@@ -2,13 +2,18 @@
 
 <h1>Users</h1>
 
-<table>
+<table class="table table-hover">
   <tbody>
-    <% @users.each do |user| %>
+  <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.username, user %></td>
+        <td>
+          <% if user.blocked %>
+          Account Frozen
+          <% end %>
+        </td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 

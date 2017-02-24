@@ -46,9 +46,16 @@ class User < ActiveRecord::Base
       }
     end  
     averages_of_styles.sort_by{ |b| -b[:rating] }.first[:style]
-  end   
+  end
+
+
 
   def is_member_of?(beer_club)
     beer_clubs.include? beer_club
-  end  
+  end
+
+  def self.top(n)
+    sorted_by_rating_in_desc_order = User.all.sort_by{ |b| -(b.average_rating||0) }
+    sorted_by_rating_in_desc_order.take(n)
+  end
 end

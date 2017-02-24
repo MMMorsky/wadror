@@ -6,39 +6,47 @@
 
 <% if @user.beer_clubs.any? %>
 
-  <p>member of
-  <% @user.beer_clubs.each do |club| %>
-    <%= link_to club.name, club%>
-  <% end %>
-  </p>
+    <p>member of
+      <% @user.beer_clubs.each do |club| %>
+          <%= link_to club.name, club %>
+      <% end %>
+    </p>
 <% else %>
-  <p>no beerclub memberships</p>
+    <p>no beerclub memberships</p>
 <% end %>
 
 <% if @user.ratings.any? %>
-  <p> Favorite beer: <%= @user.favorite_beer.name %> </p>
-  <p> Favorite brewery: <%= @user.favorite_brewery.name %> </p>
-  <p> Favorite style: <%= @user.favorite_style %> </p>
+    <p> Favorite beer: <%= @user.favorite_beer.name %> </p>
+    <p> Favorite brewery: <%= @user.favorite_brewery.name %> </p>
+    <p> Favorite style: <%= @user.favorite_style %> </p>
 
-  <p> average rating <%= @user.average_rating %></p>
+    <p> average rating <%= @user.average_rating %></p>
 
-  <h3>ratings</h3>
+    <h3>ratings</h3>
 
-  <ul>
-  <% @user.ratings.each do |r| %>
-    <li>
-      <%= r %>
-      <% if @user == current_user %>
-        <%= link_to 'delete', r, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <ul>
+      <% @user.ratings.each do |r| %>
+          <li>
+            <%= r %>
+            <% if @user == current_user %>
+                <%= link_to 'delete', r, method: :delete, data: {confirm: 'Are you sure?'} %>
+            <% end %>
+          </li>
       <% end %>
-    </li>
-  <% end %>
-  </ul>
+    </ul>
 
 <% end %>
 
-
-<% if @user==current_user%>
-  <%= link_to 'change password', edit_user_path(@user) %> <br>
-  <%= link_to 'destroy', @user, method: :delete, data: { confirm: 'Are you sure?' }  %> 
+<% if current_user %>
+    <% if current_user.admin %>
+        <% if @user.blocked %>
+            <%= link_to "unFreeze", unFreezeAccount_user_path(@user.id), method: :post, class: "btn btn-primary" %>
+        <% else %>
+            <%= link_to "Freeze", freezeAccount_user_path(@user.id), method: :post, class: "btn btn-primary" %>
+        <% end %>
+    <% end %>
+<% end %>
+<% if @user==current_user %>
+    <%= link_to 'change password', edit_user_path(@user) %> <br>
+    <%= link_to 'destroy', @user, method: :delete, data: {confirm: 'Are you sure?'} %>
 <% end %>

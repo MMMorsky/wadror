@@ -13,4 +13,13 @@ Rails.application.routes.draw do
   root 'breweries#index'
   resources :places, only:[:index, :show]
   post 'places', to:'places#search'
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
+  resources :users do
+    post 'freezeAccount', on: :member
+  end
+  resources :users do
+    post 'unFreezeAccount', on: :member
+  end
 end

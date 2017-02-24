@@ -7,7 +7,5 @@ class Place < OpenStruct
     ERB::Util.url_encode("#{street} #{city} #{country}") 
   end
 
-  def url
-    "//www.google.com/maps/embed/v1/place?q=#{address_line}&zoom=17&key=#{ENV['GOOGLE_KEY']}"
-  end 
+
 end
